@@ -41,18 +41,19 @@ public class EmployeeFakeDao implements EmployeeDao {
     }
 
     @Override
-    public void updateEmployeeById(UUID id, Employee employee) {
+    public void updateEmployeeById(UUID id, Employee employeeUpdate) {
         getEmployeeById(id)
-                .map(e -> {
+                .map(employee -> {
                     int indexOfEmployeeToDelete = DB.indexOf(employee);
                     if(indexOfEmployeeToDelete >= 0){
-                        DB.set(indexOfEmployeeToDelete, employee);
+                        DB.set(indexOfEmployeeToDelete, new Employee(id, employeeUpdate.getFirstName(),
+                                employeeUpdate.getLastName(),
+                                employeeUpdate.getSSN()));
                     } else try {
                         throw new IllegalAccessException();
                     } catch (IllegalAccessException illegalAccessException) {
                         illegalAccessException.printStackTrace();
                     }
-                    return null;
-                }).orElse(null);
+                    return null;});
     }
 }
