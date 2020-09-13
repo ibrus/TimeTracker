@@ -1,0 +1,9 @@
+app:
+  dataSource:
+    mysql:
+      port: 3306
+      username: root
+      password: admin
+      host: 172.17.0.2
+      database: timetracker
+      jdbc-url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/timetracker
