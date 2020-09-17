@@ -12,8 +12,12 @@ import java.util.UUID;
 @RestController
 public class EmployeeController {
 
+    private final EmployeeService employeeService;
+
     @Autowired
-    private EmployeeService employeeService;
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
 
     @PostMapping
     public void addEmployee(@RequestBody Employee employee){
@@ -26,18 +30,18 @@ public class EmployeeController {
     }
 
     @GetMapping(path = "{id}")
-    public Employee getEmployeeById(@PathVariable("id") UUID id){
+    public Employee getEmployeeById(@PathVariable("id") Long id){
         return employeeService.getEmployeeById(id)
                 .orElse(null);
     }
 
     @DeleteMapping(path = "{id}")
-    public void deleteEmployeeById(@PathVariable("id") UUID id){
+    public void deleteEmployeeById(@PathVariable("id") Long id){
         employeeService.deleteEmployeeById(id);
     }
 
     @PutMapping(path = "{id}")
-    public void updateEmployeeById(@PathVariable("id") UUID id, @RequestBody Employee employee){
+    public void updateEmployeeById(@PathVariable("id") Long id, @RequestBody Employee employee){
         employeeService.updateEmployeeById(id, employee);
     }
 }

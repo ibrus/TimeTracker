@@ -1,38 +1,34 @@
 package com.timetracker.service;
 
-import com.timetracker.dao.EmployeeDao;
 import com.timetracker.model.Employee;
+import com.timetracker.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class EmployeeService {
 
     @Autowired
-    private EmployeeDao employeeDao;
+    private EmployeeRepository employeeRepository;
 
     public void addEmployee(Employee employee){
-        employeeDao.addEmployee(employee);
+        employeeRepository.save(employee);
     }
 
     public List<Employee> getAllEmployee(){
-        return employeeDao.getAllEmployee();
+        List<Employee> result = new ArrayList<>();
+        employeeRepository.findAll().forEach(result::add);
+        return  result;
     }
 
-    public Optional<Employee> getEmployeeById(UUID id){
-        return employeeDao.getEmployeeById(id);
+    public Optional<Employee> getEmployeeById(Long id){
+        return employeeRepository.findById(id);
     }
 
-    public void deleteEmployeeById(UUID id){
-        employeeDao.deleteEmployeeById(id);
-    }
-
-    public void updateEmployeeById(UUID id, Employee employee){
-        employeeDao.updateEmployeeById(id, employee);
+    public void deleteEmployeeById(Long id){
+        employeeRepository.deleteById(id);
     }
 
 }
