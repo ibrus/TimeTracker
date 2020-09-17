@@ -13,14 +13,14 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public void addEmployee(Employee employee){
+    public void saveEmployee(Employee employee){
         employeeRepository.save(employee);
     }
 
     public List<Employee> getAllEmployee(){
         List<Employee> result = new ArrayList<>();
         employeeRepository.findAll().forEach(result::add);
-        return  result;
+        return result;
     }
 
     public Optional<Employee> getEmployeeById(Long id){
