@@ -6,25 +6,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
-import java.util.UUID;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 @NoArgsConstructor
 @Getter @Setter
 public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String firstName;
     private String lastName;
-    private String SSN;
+    private String ssn;
 
-
-    public Employee(Long id,
-                    @JsonProperty("firstName") String firstName,
-                    @JsonProperty("lastName") String lastName,
-                    @JsonProperty("SSN") String SSN) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.SSN = SSN;
-    }
 }

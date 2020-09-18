@@ -10,8 +10,12 @@ import java.util.*;
 @Service
 public class EmployeeService {
 
+    private final EmployeeRepository employeeRepository;
+
     @Autowired
-    private EmployeeRepository employeeRepository;
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
     public void saveEmployee(Employee employee){
         employeeRepository.save(employee);
