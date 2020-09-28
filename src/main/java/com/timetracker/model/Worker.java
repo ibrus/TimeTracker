@@ -9,5 +9,5 @@ import java.util.List;
 public class Worker extends Employee{
 
     private Supervisor supervisor;
-    private List<LocalDate> punches = new LinkedList<>();
+
 }
